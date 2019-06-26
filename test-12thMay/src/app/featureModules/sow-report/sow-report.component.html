@@ -1,0 +1,188 @@
+
+<div>
+  <div class="row">
+    <div class="col-12 standard-page-title">
+         <h4>Sow Report</h4>
+    </div>
+
+    <div class="col-12">
+       <custom-tabs [tabs]="tabList" (selectTab)="loadData($event)" ></custom-tabs>
+    </div>
+  </div>
+</div>
+
+
+<div class="row custom-search offset-sm-7">
+
+      <div class="col-5 offset-sm-2">
+        <input type="text" placeholder="Sow Search" [(ngModel)]="sowid">
+        <span class="fa fa-search"></span>
+      </div>
+   
+      <div class="col-4"> 
+        <span class="custom-add"><i class="fa fa-plus" (click)="open(content)"></i>Add SOW</span>
+      </div>
+
+</div>
+
+<div class="row">
+ <div class="container-fluid table-align table-responsive ">
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>BU</th>
+          <th>SOW</th>
+          <th>Sow Detail</th>
+          <th>SOW Value</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Edit</th>
+          <th>Delete</th>
+         
+  
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sowEntry of sowReportData | sowSearch: sowid">
+          <td>{{ sowEntry.businessUnit }}</td>
+          <td>{{ sowEntry.SOW }}</td>
+          <td>{{ sowEntry.sowDetails }}</td>
+          <td>{{ sowEntry.sowValue }}</td>
+          <td>{{ sowEntry.startDate }}</td>
+          <td>{{ sowEntry.endDate }}</td>
+          <td><i class="far fa-edit"></i></td>
+          <td><i class="fa fa-trash" (click)="deleteRecord()"></i></td>
+          
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="model-dialog">
+    <div class="model-content">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">SOW Details</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+          <span>&times;</span>
+        </button>
+      </div>
+    
+    <div class="modal-body">
+        
+      <form>
+
+            <div class="form-group row">
+                <label for="businessunit" class="col-4">Business Unit:</label>
+                <div class="input-group col-8">
+                  <input type="text" id="businessunit" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="msa" class="col-4">MSA:</label>
+                <div class="input-group col-8">
+                  <input type="text" readonly id="msa" class="form-control-plaintext" value="Cognizant">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="contractnumber" class="col-4">Contract Number:</label>
+                <div class="input-group col-8">
+                  <input type="text" id="contractnumber" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="sowid" class="col-4">Sow Number:</label>
+                <div class="input-group col-8">
+                  <input type="text" id="sowid" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="amd" class="col-4">Amendment Number:</label>
+                <div class="input-group col-8">
+                  <input type="text" id="amd" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="sowdetail" class="col-4">Sow Details:</label>
+                <div class="input-group col-8">
+                  <input type="text" id="sowdetail" class="form-control">
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label for="contracttype" class="col-4">Contract Type:</label>
+                <div class="input-group col-8">
+                  <input type="text" id="contracttype" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="worktype" class="col-4">Work Type:</label>
+                <div class="input-group col-8">
+                  <input type="text" id="worktype" class="form-control">
+                </div>
+            </div>
+
+          <div class="form-group">
+            <label for="businessunit"></label>
+            <label for="dateOfBirth">Date of birth</label>
+            <div class="input-group">
+              <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+              </div>
+            </div>
+           </div>
+       
+    </form>
+
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+  </div>
+</div>
+</div>
+</ng-template>
+
+
+<ng-template #deleteSow>
+    
+      <div class="modal-header">
+          <h6 class="modal-title">Delete SOW Record</h6>
+          <button type="button" class="close" (click)="modalRef.close()">
+            <span>&times;</span>
+          </button>
+        </div>
+      
+      <div class="modal-body">
+          
+       <h6 class="custom-modal-body">Are you sure want to delete this record?</h6>
+     
+    <div class="modal-footer custom-modal-footer">
+      <button type="button" class="btn btn-primary" >Delete</button>
+      <button type="button" class="btn btn-outline-primary" (click)="modalRef.close()">Cancel</button>
+    </div>
+   
+   </div>
+  
+ 
+  
+  </ng-template>
+  
+
+
+  
+  
+
+ 
+ 

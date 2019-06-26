@@ -1,0 +1,9 @@
+
+  <div class="custom-tabs clearfix">
+    <ul class="clearfix">
+      <li *ngFor="let tab of tabs" (click)="switchTab(tab)" >
+          <a [ngClass]="{'selected': tab.tabName === activeTab}">{{tab.tabName}}</a>            
+      </li>
+    </ul>
+  </div>
+  
